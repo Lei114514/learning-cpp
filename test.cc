@@ -4,8 +4,15 @@
 int main()
 {
     IniParse iniParse;
-    int err=iniParse.parse("sample.ini");
-    if(err) std::cout<<err<<std::endl;
+    IniParse::ParseResult err=iniParse.parse("sample.ini");
+    if(err!=IniParse::ParseResult::kSuccess)
+    {
+        std::cout<<static_cast<int>(err)<<std::endl;
+    }
+    else 
+    {
+        std::cout<<"success\n";
+    }
     auto data=iniParse.getAllSections();
     for(auto [x,map_]:data)
     {
